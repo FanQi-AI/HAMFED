@@ -2,7 +2,7 @@
 # Hypergraph Aggregation for Modality Agnostic Federated Learning
 
 <div align="center">
-  <img src="./Fig/framework.png" alt="图片名称1" style="width: 80%; display: inline-block; margin-right: 5%;" />
+  <img src="./Fig/framework.png" alt="图片名称1" style="width: 70%; display: inline-block; margin-right: 5%;" />
 </div>
 <p align="center"><em>The network architecture of the proposed framework. Client side: (a) Modular Architecture for Local Model. Server-side: (b) Global Consensus Prototype Enhancer and (c) Multimodal Hypergraph Aggregation.</em></p>
 
