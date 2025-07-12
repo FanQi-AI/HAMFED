@@ -48,7 +48,7 @@ def train(clients_models,dataloaders,epoch,device,clients_data_num):
     
     for com in range(COMMUNICATION): 
         
-        selected_clients_id = np.random.choice(CLIENTS*2, int(CLIENTS*2 * RATIO), replace=False)
+        selected_clients_id = np.random.choice(CLIENTS*Mutimodel_num, int(CLIENTS*Mutimodel_num * RATIO), replace=False)
         for epoch in range(EPOCH): 
             loss_total=train_epoch_client(selected_clients_id,clients_models,optim_sched_clients,dataloaders,device,comm_dataloader=common_dataloader_mutimodal)
         writer.add_scalar('loss', loss_total/total_data_num, com)
@@ -94,7 +94,7 @@ def train(clients_models,dataloaders,epoch,device,clients_data_num):
         X2 = pca.fit_transform(np.array(X2))
         X11=[]
         X22=[]
-        for i in range(0,int(CLIENTS*2 * RATIO*8),8):
+        for i in range(0,int(CLIENTS*Mutimodel_num * RATIO*8),8):
             X11.append(X1[i])
             X22.append(X2[i])
         X1=torch.Tensor(X11)
@@ -208,10 +208,10 @@ if __name__ == '__main__':
     global clients_data_num,total_data_num
     clients_data_num=[] 
     total_data_num=0    
-    for c in range(CLIENTS*2): 
-        if c<10:
+    for c in range(CLIENTS*Mutimodel_num): 
+        if c<CLIENTS:
             values, counts = np.unique(a_label[a_data_splits[c]], return_counts=True) 
-        elif c<20:
+        elif c<CLIENTS*Mutimodel_num:
             values, counts = np.unique(v_label[v_data_splits[c-10]], return_counts=True) 
         dictionary = dict(zip(values, counts))  
         ratio = np.zeros(NUM_CLASSES)   
@@ -229,10 +229,10 @@ if __name__ == '__main__':
     common_dataloader.append(DataLoader(datasetcommon_v,batch_size=BATCH))
     
     np.random.seed(42)
-    for c in range(CLIENTS*2): 
-        if c<10:
+    for c in range(CLIENTS*Mutimodel_num): 
+        if c<CLIENTS:
             data=a_data_splits[c]
-        elif c<20:
+        elif c<CLIENTS *Mutimodel_num :
             data=v_data_splits[c-10]
         
         if c<10:
@@ -251,7 +251,7 @@ if __name__ == '__main__':
     random.seed(42)
     initial_modela=Attention(FEADIM,FEADIM,NUM_CLASSES,'512,256',drop_para).to('cpu')
     initial_modelv=Attention(FEADIM,FEADIM,NUM_CLASSES,'512,256',drop_para).to('cpu')
-    for c in range(CLIENTS*2):
+    for c in range(CLIENTS*Mutimodel_num):
         if c<10:
             clients_models.append(copy.deepcopy(initial_modela)) 
         elif c<20:
