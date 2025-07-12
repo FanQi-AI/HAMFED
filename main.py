@@ -42,7 +42,7 @@ def train(clients_models,dataloaders,epoch,device,clients_data_num):
     
     global_prototype=[]
     pca = PCA(n_components=96) 
-    modal_enhancer=Multimodal_enhancer(mod1_dim=2048, mod2_dim=2048, num_classes=NUM_CLASSES, prototype_dim=256)
+    modal_enhancer=Multimodal_enhancer(mod1_dim=FEADIM, mod2_dim=FEADIM, num_classes=NUM_CLASSES, prototype_dim=256)
     datasetcommon_mutimodal = Common_DataSet(mode='common',path=None)
     common_dataloader_mutimodal=DataLoader(datasetcommon_mutimodal,batch_size=BATCH)
     
