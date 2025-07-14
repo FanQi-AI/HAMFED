@@ -1,5 +1,4 @@
 # HAMFED
-# Hypergraph Aggregation for Modality Agnostic Federated Learning
 
 <div align="center">
   <img src="./Fig/framework.png" alt="图片名称1" style="width: 70%; display: inline-block; margin-right: 5%;" />
